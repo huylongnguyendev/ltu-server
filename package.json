@@ -1,25 +1,12 @@
 {
   "name": "ltu-api",
   "version": "0.0.1",
-  "private": true,
-  "description": "<p align=\"center\">\r   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo-small.svg\" width=\"120\" alt=\"Nest Logo\" /></a>\r </p>",
-  "homepage": "https://github.com/huylongnguyendev/ltu-server#readme",
-  "bugs": {
-    "url": "https://github.com/huylongnguyendev/ltu-server/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/huylongnguyendev/ltu-server.git"
-  },
-  "license": "UNLICENSED",
+  "description": "",
   "author": "",
-  "type": "commonjs",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "private": true,
+  "license": "UNLICENSED",
   "scripts": {
-    "build": "prisma generate && nest build",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -41,11 +28,16 @@
     "@nestjs/throttler": "^6.5.0",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
+    "@supabase/supabase-js": "^2.99.0",
+    "@types/bcrypt": "^6.0.0",
+    "bcrypt": "^6.0.0",
     "class-sanitizer": "^1.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.3.1",
     "helmet": "^8.1.0",
+    "jwks-rsa": "^4.0.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "pg": "^8.20.0",
