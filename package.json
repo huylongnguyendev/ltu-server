@@ -1,13 +1,25 @@
 {
   "name": "ltu-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
   "private": true,
+  "description": "<p align=\"center\">\r   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo-small.svg\" width=\"120\" alt=\"Nest Logo\" /></a>\r </p>",
+  "homepage": "https://github.com/huylongnguyendev/ltu-server#readme",
+  "bugs": {
+    "url": "https://github.com/huylongnguyendev/ltu-server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huylongnguyendev/ltu-server.git"
+  },
   "license": "UNLICENSED",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "postinstall": "prisma generate",
-    "build": "nest build",
+    "build": "prisma generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
