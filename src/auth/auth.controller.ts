@@ -35,7 +35,7 @@ export class AuthController {
       ? 30 * 24 * 60 * 60 * 1000
       : 1 * 24 * 60 * 60 * 1000;
 
-    res.cookie("access_token", access_token, {
+    (res as any).cookie("access_token", access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -43,7 +43,7 @@ export class AuthController {
       maxAge: access_time * 1000,
     });
 
-    res.cookie("refresh_token", refresh_token, {
+    (res as any).cookie("refresh_token", refresh_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -85,7 +85,7 @@ export class AuthController {
     const { access_time, access_token, message, user, refresh_token } =
       await this.authService.refresh(refreshToken);
 
-    res.cookie("access_token", access_token, {
+    (res as any).cookie("access_token", access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
@@ -93,7 +93,7 @@ export class AuthController {
       maxAge: access_time * 1000,
     });
 
-    res.cookie("refresh_token", refresh_token, {
+    (res as any).cookie("refresh_token", refresh_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
