@@ -148,7 +148,10 @@ export class AuthService {
 
       if (!user) throw new UnauthorizedException("User not found.");
 
-      return user;
+      return {
+        message: "Get user",
+        user,
+      };
     } catch (error) {
       if (error instanceof UnauthorizedException) throw error;
       throw new InternalServerErrorException(error.message);

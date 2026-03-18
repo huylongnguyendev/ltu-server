@@ -36,10 +36,10 @@ export class EnrollController {
     return res;
   }
 
-  @Public()
-  @Patch("submit/:id")
-  async submitTest(@Param("id") id: string, @Body() data: UpdateEnrollDto) {
-    const res = await this.enrollService.submit(id, data);
-    return res;
-  }
+  // @Public()
+  // @Patch("submit/:id")
+  // async submitTest(@Param("id") id: string, @Body() data: UpdateEnrollDto) {
+  //   const res = await this.enrollService.submit(id, data);
+  //   return res;
+  // }
 }

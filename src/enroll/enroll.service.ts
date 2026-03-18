@@ -120,35 +120,35 @@ export class EnrollService {
     }
   }
 
-  async submit(id: string, data: UpdateEnrollDto) {
-    try {
-      const enroll = await this.prisma.enroll.findUnique({ where: { id } });
+  // async submit(id: string, data: UpdateEnrollDto) {
+  //   try {
+  //     const enroll = await this.prisma.enroll.findUnique({ where: { id } });
 
-      if (!enroll) throw new NotFoundException("Test room not found.");
+  //     if (!enroll) throw new NotFoundException("Test room not found.");
 
-      if (enroll.startAt && enroll.expectedEnd) {
-        const { attempts } = data;
-        const currentAttempts = enroll.attempts;
+  //     if (enroll.startAt && enroll.expectedEnd) {
+  //       const { attempts } = data;
+  //       const currentAttempts = enroll.attempts;
+  //       const newAttempts = attempts && attempts;
+  //       await this.prisma.enroll.update({
+  //         where: { id: enroll.id },
+  //         data: {
+  //           attempts: [...currentAttempts, ...newAttempts],
+  //           responses: {},
+  //           violateCount: 0,
+  //           duration: 0,
+  //           startAt: null,
+  //           expectedEnd: null,
+  //           status: "COMPLETED",
+  //         },
+  //       });
 
-        await this.prisma.enroll.update({
-          where: { id: enroll.id },
-          data: {
-            attempts: [...currentAttempts, ...attempts],
-            responses: {},
-            violateCount: 0,
-            duration: 0,
-            startAt: null,
-            expectedEnd: null,
-            status: "COMPLETED",
-          },
-        });
-
-        return { message: "Submit success." };
-      }
-    } catch (error) {
-      throw new InternalServerErrorException(error.message);
-    }
-  }
+  //       return { message: "Submit success." };
+  //     }
+  //   } catch (error) {
+  //     throw new InternalServerErrorException(error.message);
+  //   }
+  // }
 
   async startTest(id: string) {
     try {
