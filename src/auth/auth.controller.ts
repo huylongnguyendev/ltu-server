@@ -10,12 +10,12 @@ import {
   Req,
   UnauthorizedException,
 } from "@nestjs/common";
-import { AuthService } from "./auth.service";
-import { CreateAuthDto } from "./dto/create-auth.dto";
-import { GetAuthDto } from "./dto/get-auth.dto";
-import { Public } from "./public.decorator";
-import type { Response } from "express";
-import { JwtAuthGuard } from "./jwt-auth.guard";
+import { AuthService } from "./auth.service.js";
+import { CreateAuthDto } from "./dto/create-auth.dto.js";
+import { GetAuthDto } from "./dto/get-auth.dto.js";
+import { Public } from "./public.decorator.js";
+import type { Request, Response } from "express";
+import { JwtAuthGuard } from "./jwt-auth.guard.js";
 
 @Controller("auth")
 export class AuthController {
@@ -64,7 +64,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get("me")
-  async getMe(@Req() req) {
+  async getMe(@Req() req: Request) {
     const token = req.cookies["access_token"];
 
     if (!token || typeof token !== "string")
