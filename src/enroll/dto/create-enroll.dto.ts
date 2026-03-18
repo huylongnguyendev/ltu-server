@@ -1,5 +1,6 @@
 import { EnrollStatus } from "@prisma/client";
 import {
+  IsArray,
   IsDateString,
   IsEnum,
   IsNotEmpty,
@@ -30,7 +31,8 @@ export class CreateEnrollDto {
   duration?: number;
 
   @IsOptional()
-  attempts: any;
+  @IsArray()
+  attempts?: any[];
 
   @IsNumber()
   @IsOptional()
@@ -41,5 +43,5 @@ export class CreateEnrollDto {
   status: EnrollStatus;
 
   @IsOptional()
-  responses: any;
+  responses?: any;
 }
