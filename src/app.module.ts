@@ -1,13 +1,13 @@
 import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
-import { AppController } from "./app.controller";
+import { AppController } from "./app.controller.js";
 import { APP_GUARD } from "@nestjs/core";
-import { CommonHeadersMiddleware } from "./common-headers.middleware";
-import { PrismaModule } from "./prisma/prisma.module";
-import { AuthModule } from "./auth/auth.module";
-import { JwtAuthGuard } from "./auth/jwt-auth.guard";
-import { ExamModule } from "./exam/exam.module";
-import { EnrollModule } from "./enroll/enroll.module";
+import { CommonHeadersMiddleware } from "./common-headers.middleware.js";
+import { PrismaModule } from "./prisma/prisma.module.js";
+import { AuthModule } from "./auth/auth.module.js";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard.js";
+import { ExamModule } from "./exam/exam.module.js";
+import { EnrollModule } from "./enroll/enroll.module.js";
 
 @Module({
   imports: [

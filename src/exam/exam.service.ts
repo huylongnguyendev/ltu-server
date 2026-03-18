@@ -3,10 +3,10 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from "@nestjs/common";
-import { CreateExamDto } from "./dto/create-exam.dto";
+import { CreateExamDto } from "./dto/create-exam.dto.js";
 // import { UpdateExamDto } from "./dto/update-exam.dto";
-import { PrismaService } from "src/prisma/prisma.service";
-import { GetExamsDto } from "./dto/get-exam.dto";
+import { PrismaService } from "src/prisma/prisma.service.js";
+import { GetExamsDto } from "./dto/get-exam.dto.js";
 import { Prisma } from "@prisma/client";
 
 @Injectable()
