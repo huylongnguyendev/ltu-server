@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
 import { EnrollService } from "./enroll.service.js";
-import { Public } from "src/auth/public.decorator.js";
+import { Public } from "../auth/public.decorator.js";
 import { CreateEnrollDto } from "./dto/create-enroll.dto.js";
 import { UpdateEnrollDto } from "./dto/update-enroll.dto.js";
 

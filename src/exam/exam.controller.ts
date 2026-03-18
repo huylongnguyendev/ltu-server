@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
 import { ExamService } from "./exam.service.js";
 import { CreateExamDto } from "./dto/create-exam.dto.js";
-import { Public } from "src/auth/public.decorator.js";
+import { Public } from "../auth/public.decorator.js";
 import { GetExamsDto } from "./dto/get-exam.dto.js";
 
 @Controller("exam")

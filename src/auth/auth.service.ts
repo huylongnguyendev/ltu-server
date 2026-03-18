@@ -5,13 +5,13 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
-import { CreateAuthDto } from "./dto/create-auth.dto";
+import { CreateAuthDto } from "./dto/create-auth.dto.js";
 // import { UpdateAuthDto } from "./dto/update-auth.dto";
 import bcrypt from "bcrypt";
-import { GetAuthDto } from "./dto/get-auth.dto";
+import { GetAuthDto } from "./dto/get-auth.dto.js";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import "dotenv/config";
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from "../prisma/prisma.service.js";
 
 const supabaseURL = process.env.SUPABASE_URL;
 const supabaseAnon = process.env.SUPABASE_ANON_KEY;

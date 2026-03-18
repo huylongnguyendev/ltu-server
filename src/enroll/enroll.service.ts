@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { CreateEnrollDto } from "./dto/create-enroll.dto.js";
-import { PrismaService } from "src/prisma/prisma.service.js";
+import { PrismaService } from "../prisma/prisma.service.js";
 import { UpdateEnrollDto } from "./dto/update-enroll.dto.js";
 
 @Injectable()

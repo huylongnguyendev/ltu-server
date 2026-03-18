@@ -44,7 +44,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: SupabaseJwtPayload) {
+  validate(payload: SupabaseJwtPayload) {
     if (!payload || !payload.sub) {
       throw new UnauthorizedException("Token has no valid user identifier");
     }
