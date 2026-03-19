@@ -16,8 +16,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(cookieParser());
   app.enableCors({
-    origin:
-      !ENV || ENV === "development" ? "http://localhost:3000" : URLs.split(","),
+    origin: !ENV || ENV === "development" ? "http://localhost:3000" : URLs,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     allowedHeaders: [
