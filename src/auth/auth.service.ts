@@ -21,14 +21,12 @@ if (!supabaseAnon || !supabaseURL)
 
 @Injectable()
 export class AuthService {
-  private supabase: SupabaseClient;
+  private supabase: SupabaseClient = createClient(
+    process.env.SUPABASE_URL ?? "",
+    process.env.SUPABASE_ANON_KEY ?? "",
+  );
 
-  constructor(private readonly prisma: PrismaService) {
-    this.supabase = createClient(
-      process.env.SUPABASE_URL ?? "",
-      process.env.SUPABASE_ANON_KEY ?? "",
-    );
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateAuthDto) {
     try {
