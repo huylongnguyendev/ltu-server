@@ -23,8 +23,10 @@ export class ExamService {
   }
 
   async findAll(req: GetExamsDto) {
-    const { page = 1, limit = 10, search, sort, type } = req;
+    const { search, sort, type } = req;
 
+    const page = Number(req.page) || 1;
+    const limit = Number(req.limit) || 10;
     const skip = (page - 1) * limit;
 
     const orderBy: Record<string, any> = { createdAt: "desc" };
@@ -46,7 +48,7 @@ export class ExamService {
       const exams = await this.prisma.exam.findMany({
         where: {
           name: search ? { contains: search, mode: "insensitive" } : undefined,
-          type: type || undefined,
+          type: (req.type as any) || undefined,
         },
         select: { id: true, name: true, img: true, createdAt: true },
         orderBy,
