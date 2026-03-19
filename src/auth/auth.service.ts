@@ -21,7 +21,7 @@ if (!supabaseAnon || !supabaseURL)
 
 @Injectable()
 export class AuthService {
-  private supabase: SupabaseClient<any, "public", any> = createClient(
+  private supabase = createClient(
     process.env.SUPABASE_URL ?? "",
     process.env.SUPABASE_ANON_KEY ?? "",
   );
