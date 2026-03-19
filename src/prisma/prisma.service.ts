@@ -1,7 +1,7 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./prisma.js";
-import { Pool } from "pg";
+import pg from "pg";
 
 @Injectable()
 export class PrismaService
@@ -12,7 +12,7 @@ export class PrismaService
     const connectionString: string | undefined = process.env.DATABASE_URL;
     if (!connectionString) throw new Error("connectionString is undefined");
 
-    const pool = new Pool({ connectionString, max: 10 });
+    const pool = new pg.Pool({ connectionString, max: 10, ssl: true });
     const adapter = new PrismaPg(pool);
     super({ adapter });
   }
