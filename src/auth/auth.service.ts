@@ -9,7 +9,7 @@ import { CreateAuthDto } from "./dto/create-auth.dto.js";
 // import { UpdateAuthDto } from "./dto/update-auth.dto";
 import bcrypt from "bcrypt";
 import { GetAuthDto } from "./dto/get-auth.dto.js";
-import { createClient, SupabaseClient } from "../supabase.js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import "dotenv/config";
 import { PrismaService } from "../prisma/prisma.service.js";
 
@@ -21,7 +21,7 @@ if (!supabaseAnon || !supabaseURL)
 
 @Injectable()
 export class AuthService {
-  private supabase: SupabaseClient = createClient(
+  private supabase: SupabaseClient<any, "public", any> = createClient(
     process.env.SUPABASE_URL ?? "",
     process.env.SUPABASE_ANON_KEY ?? "",
   );
