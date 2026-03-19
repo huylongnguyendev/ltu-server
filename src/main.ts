@@ -7,8 +7,6 @@ import cookieParser from "cookie-parser";
 
 async function bootstrap() {
   const PORT = process.env.PORT;
-  const ENV = process.env["NODE_ENV"];
-  const URLs = process.env["ACCEPT_URL"] || "";
 
   if (!PORT) throw new Error("PORT is undefined");
   const app = await NestFactory.create(AppModule);
@@ -16,7 +14,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(cookieParser());
   app.enableCors({
-    origin: !ENV || ENV === "development" ? "http://localhost:3000" : URLs,
+    origin: ["https://ltu-client.vercel.app", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     allowedHeaders: [
