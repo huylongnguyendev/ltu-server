@@ -12,7 +12,13 @@ export class PrismaService
     const connectionString: string | undefined = process.env.DATABASE_URL;
     if (!connectionString) throw new Error("connectionString is undefined");
 
-    const pool = new pg.Pool({ connectionString, max: 10, ssl: true });
+    const pool = new pg.Pool({
+      connectionString,
+      max: 10,
+      ssl: {
+        rejectUnauthorized: false, // Dòng này sẽ bỏ qua lỗi chứng chỉ tự ký
+      },
+    });
     const adapter = new PrismaPg(pool);
     super({ adapter });
   }
