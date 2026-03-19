@@ -48,9 +48,15 @@ export class ExamService {
       const exams = await this.prisma.exam.findMany({
         where: {
           name: search ? { contains: search, mode: "insensitive" } : undefined,
-          type: (req.type as any) || undefined,
+          type: req.type || undefined,
         },
-        select: { id: true, name: true, img: true, createdAt: true },
+        select: {
+          id: true,
+          name: true,
+          img: true,
+          createdAt: true,
+          type: true,
+        },
         orderBy,
         skip,
         take: limit,
