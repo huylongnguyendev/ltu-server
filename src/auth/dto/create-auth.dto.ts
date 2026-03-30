@@ -22,6 +22,12 @@ export class CreateAuthDto {
   email: string;
 
   @IsString()
+  @IsNotEmpty({ message: "Phone number is required." })
+  @Trim()
+  @Escape()
+  phoneNumber: string;
+
+  @IsString()
   @IsNotEmpty({ message: "First name is required." })
   @Trim()
   @Escape()
@@ -32,12 +38,6 @@ export class CreateAuthDto {
   @Trim()
   @Escape()
   lastName: string;
-
-  // @IsString()
-  // @IsNotEmpty({ message: "Full name is required." })
-  // @Trim()
-  // @Escape()
-  // fullName: string;
 
   @IsString()
   @IsStrongPassword(
@@ -70,4 +70,8 @@ export class CreateAuthDto {
   @Trim()
   @Escape()
   username: string;
+
+  @IsString()
+  @IsOptional()
+  userCode?: string;
 }

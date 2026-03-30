@@ -9,9 +9,9 @@ import { CreateAuthDto } from "./dto/create-auth.dto.js";
 // import { UpdateAuthDto } from "./dto/update-auth.dto";
 import bcrypt from "bcrypt";
 import { GetAuthDto } from "./dto/get-auth.dto.js";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import "dotenv/config";
-import { PrismaService } from "../prisma/prisma.service.js";
+import { PrismaService } from "src/prisma/prisma.service.js";
 
 const supabaseURL = process.env.SUPABASE_URL;
 const supabaseAnon = process.env.SUPABASE_ANON_KEY;
@@ -19,18 +19,27 @@ const supabaseAnon = process.env.SUPABASE_ANON_KEY;
 if (!supabaseAnon || !supabaseURL)
   throw new Error("supabaseAnon/supabaseURL is undefined");
 
+const UserCode = {
+  "535455": "STUDENT",
+  "4C4543": "LECTURER",
+  "41444D": "ADMIN",
+};
+
 @Injectable()
 export class AuthService {
-  private supabase;
+  private supabase: SupabaseClient;
+
   constructor(private readonly prisma: PrismaService) {
     this.supabase = createClient(
       process.env.SUPABASE_URL ?? "",
       process.env.SUPABASE_ANON_KEY ?? "",
     );
   }
+
   async create(data: CreateAuthDto) {
     try {
-      const { firstName, lastName, password, email, username } = data;
+      const { userCode, ...rest } = data;
+      const { firstName, lastName, password, email, username } = rest;
 
       const isExistingUser = await this.prisma.user.findFirst({
         where: { OR: [{ email }, { username }] },
@@ -51,12 +60,15 @@ export class AuthService {
       const hashedPassword: string = await bcrypt.hash(password, 10);
       const fullName = `${lastName.trim()} ${firstName.trim()}`.trim();
 
+      const role = userCode ? UserCode[userCode] : "GUEST";
+
       await this.prisma.user.create({
         data: {
-          ...data,
+          ...rest,
           fullName,
           password: hashedPassword,
           id,
+          role,
         },
       });
 
@@ -146,10 +158,7 @@ export class AuthService {
 
       if (!user) throw new UnauthorizedException("User not found.");
 
-      return {
-        message: "Get user",
-        user,
-      };
+      return user;
     } catch (error) {
       if (error instanceof UnauthorizedException) throw error;
       throw new InternalServerErrorException(error.message);

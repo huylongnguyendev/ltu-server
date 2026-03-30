@@ -35,7 +35,7 @@ export class AuthController {
       ? 30 * 24 * 60 * 60 * 1000
       : 1 * 24 * 60 * 60 * 1000;
 
-    (res as any).cookie("access_token", access_token, {
+    res.cookie("access_token", access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -43,7 +43,7 @@ export class AuthController {
       maxAge: access_time * 1000,
     });
 
-    (res as any).cookie("refresh_token", refresh_token, {
+    res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
@@ -64,7 +64,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get("me")
-  async getMe(@Req() req: Request) {
+  async getMe(@Req() req) {
     const token = req.cookies["access_token"];
 
     if (!token || typeof token !== "string")
@@ -76,16 +76,22 @@ export class AuthController {
   @Public()
   @Post("refresh")
   async refresh(
-    @Body("refresh_token") refreshToken: string,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
+    console.log("Refresh is called");
+    const refreshToken: string | undefined = req.cookies?.refresh_token;
+    console.log("Received refresh token:", refreshToken);
     if (!refreshToken)
       throw new UnauthorizedException("The login session has expired.");
 
     const { access_time, access_token, message, user, refresh_token } =
       await this.authService.refresh(refreshToken);
 
-    (res as any).cookie("access_token", access_token, {
+    console.log("Access token refreshed:", access_token);
+    console.log("Refresh token used:", refreshToken);
+
+    res.cookie("access_token", access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
@@ -93,7 +99,7 @@ export class AuthController {
       maxAge: access_time * 1000,
     });
 
-    (res as any).cookie("refresh_token", refresh_token, {
+    res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
