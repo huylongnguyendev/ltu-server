@@ -11,7 +11,7 @@ import bcrypt from "bcrypt";
 import { GetAuthDto } from "./dto/get-auth.dto.js";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import "dotenv/config";
-import { PrismaService } from "src/prisma/prisma.service.js";
+import { PrismaService } from "../prisma/prisma.service.js";
 
 const supabaseURL = process.env.SUPABASE_URL;
 const supabaseAnon = process.env.SUPABASE_ANON_KEY;
